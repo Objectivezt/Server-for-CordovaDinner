@@ -1,0 +1,43 @@
+{
+  "name": "schooldinner",
+  "version": "1.0.0",
+  "description": "zhout schoolfinal",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jack-Rose/nodejsForDinner.git"
+  },
+  "author": "zhout",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jack-Rose/nodejsForDinner/issues"
+  },
+  "homepage": "https://github.com/Jack-Rose/nodejsForDinner#readme",
+  "dependencies": {
+    "async": "^2.3.0",
+    "bcrypt-nodejs": "0.0.3",
+    "bl": "^1.2.0",
+    "body-parser": "^1.17.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "cookies": "^0.7.0",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "glop": "^0.3.1",
+    "grunt": "^1.0.1",
+    "http": "0.0.0",
+    "https": "^1.0.0",
+    "koa": "^2.2.0",
+    "markdown": "^0.5.0",
+    "mysql": "^2.13.0",
+    "needle": "^1.6.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "redis": "^2.7.1",
+    "swig": "^1.4.2",
+    "ws": "^2.2.3"
+  }
+}
