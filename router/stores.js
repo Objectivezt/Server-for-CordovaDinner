@@ -1,11 +1,11 @@
 /**
- * Created by Jack on 2017/4/10.
+ * Created by Jack on 2017/4/11.
  */
 var express = require('express');
 var router = express.Router();
-//省略/admin/user->  /user
+
 router.get('/user',function (req,res,next) {
-    res.send('User');
+    res.send('userLists')
 });
 
 module.exports = router;

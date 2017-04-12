@@ -4,9 +4,6 @@
 //加载模块
 var express = require('express');
 var swig = require('swig');
-// var session = require('express-session');
-// var cookieParser = require('cookie-parser');
-// var bodyParser = require('body-parser');
 //创建app应用 相当于Node.js Http.CreateServer();
 var app = express();
 //表示参数表示模板引擎的名称，同时也是模板文件的后缀，第二个参数表示用于解析处理模板内容的方法
@@ -17,9 +14,24 @@ app.set('views','./views');
 app.set('view engine','html');
 //开发过程中取消模板缓存
 swig.setDefaults({cache: false});
+
+
+
+//管理员
 app.use('/admin',require('./router/admin'));
+//常用的api
 app.use('/api',require('./router/api'));
+//主页
 app.use('/',require('./router/main'));
+//店铺管理
+
+app.use('/categorys',require('./router/categorys'));
+//菜品管理
+app.use('/food',require('./router/food'));
+//菜品评论管理
+app.use('/comment',require('./router/comment'));
+app.use('/stores',require('./router/stores'));
+//菜品分类管理
 
 app.listen(8199);
 
