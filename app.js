@@ -8,10 +8,11 @@ var mysql = require('mysql');
 //创建app应用 相当于Node.js Http.CreateServer();
 var app = express();
 var connection = mysql.createConnection({
-    host:'127.0.0.1',
+    host:'120.24.244.81',
     user:'root',
-    password:'',
-    port:'3306'
+    password:'666996',
+    port:'3306',
+    database:'tests'
 });
 
 
@@ -70,15 +71,23 @@ connection.connect(function (err) {
     }
     console.log('connection suceesful');
 });
-//执行sql语句
-connection.query('SELECT * from test',function (err, row, fields) {
+//测试执行sql语句
+connection.query('SELECT * from ecjtu_user',function (err, row, fields) {
     if(err){
         console.log(err);
         return
     }
     console.log(row);
-    console.log(fields);
+    // console.log(fields);
+    // console.log('the solution:', row[0].solution);
 });
+connection.query('INSERT INTO ecjtu_user',function (err,result) {
+    if(err){
+        console.log('')
+    }
+})
+
+
 //关闭connection
 connection.end(function (err) {
     if(err){
