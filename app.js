@@ -4,8 +4,18 @@
 //加载模块
 var express = require('express');
 var swig = require('swig');
+var mysql = require('mysql');
 //创建app应用 相当于Node.js Http.CreateServer();
 var app = express();
+var connection = mysql.createConnection({
+    host:'127.0.0.1',
+    user:'root',
+    password:'',
+    port:'3306'
+});
+
+
+
 //表示参数表示模板引擎的名称，同时也是模板文件的后缀，第二个参数表示用于解析处理模板内容的方法
 app.engine('html',swig.renderFile);
 //设置模板文件的存放目录，第一个参数必须是views  第二个参数必须是参数的目录
@@ -50,3 +60,30 @@ app.get('/',function (req,res,next) {
     res.render('index');
 })
 console.log('hellojs');
+
+
+//创建一个connection
+connection.connect(function (err) {
+    if(err){
+        console.log(err);
+        return
+    }
+    console.log('connection suceesful');
+});
+//执行sql语句
+connection.query('SELECT * from test',function (err, row, fields) {
+    if(err){
+        console.log(err);
+        return
+    }
+    console.log(row);
+    console.log(fields);
+});
+//关闭connection
+connection.end(function (err) {
+    if(err){
+
+        return;
+    }
+    console.log('close connection');
+});
