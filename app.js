@@ -81,12 +81,18 @@ connection.query('SELECT * from ecjtu_user',function (err, row, fields) {
     // console.log(fields);
     // console.log('the solution:', row[0].solution);
 });
-connection.query('INSERT INTO ecjtu_user',function (err,result) {
+var userAddSql = 'INSERT INTO ecjtu_user values(12,"baomei","","","","111","111",1,1)';
+var userAdd2Sql = 'INSERT INTO ecjtu_user values(13,"ouyang","130266","130999","123456","11","22",1,1)';
+var userAddSql_Params = [];
+connection.query(userAddSql,function (err,result) {
     if(err){
-        console.log('')
+        console.log('123');
     }
-})
-
+    console.log(result);
+});
+connection.query(userAdd2Sql,function (err,result) {
+    console.log(result);
+});
 
 //关闭connection
 connection.end(function (err) {
