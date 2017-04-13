@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>xm-app</title>
+	<link rel="stylesheet" type="text/css" href="../lib/bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="../css/nucleo-glyph.css">
+	<link rel="stylesheet" href="../css/nucleo-outline.css">
+	<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+	<div class="container container-fluid zt-container">
+		<nav class="col-xs-12 navbar zt-header-nav zt-nav">
+			<div class="container-fluid zt-container-fluid">
+				<div class="col-xs-2">
+					<a  href="javascript:void(0)">
+						<i class="nc-icon-outline education_school zt-header-logo"></i>
+						<!--<img class="zt-header-img" src="https://static.bootcss.com/www/assets/img/bootcdn.png" alt="">-->
+					</a>
+				</div>
+				<div class="col-xs-8">
+					<div class="input-group">
+						<span class="input-group-btn">
+							<button class="btn btn-default zt-btn-search" type="button"><i class="nc-icon-outline ui-1_zoom-split"></i></button>
+						</span>
+						<input type="text" class="form-control zt-search-control" placeholder="搜索看看">
+					</div>
+				</div>
+				<div class="col-xs-2 zt-navbar-3">
+					<span class="zt-header-location"><i class="nc-icon-outline location_compass-06"></i></span>
+				</div>
+			</div>
+		</nav>
+
+		<div class="row zt-index-row">
+				<div class="col-xs-7">
+					<div class="btn-toolbar zt-btn-toolbar" role="toolbar">
+						<div class="btn-group">
+							<button class="btn btn-default btn-sm dropdown-toggle zt-dropdown-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								大四<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:void(0)">大一</a></li>
+								<li><a href="javascript:void(0)">大二</a></li>
+								<li><a href="javascript:void(0)">大三</a></li>
+								<li><a href="javascript:void(0)">大四</a></li>
+							</ul>
+						</div><!-- /btn-group -->
+					</div>
+					<div class="btn-toolbar zt-btn-toolbar" role="toolbar">
+						<div class="btn-group">
+							<button class="btn btn-default btn-sm dropdown-toggle zt-dropdown-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								上学期<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="#">上学期</a></li>
+								<li><a href="#">下学期</a></li>
+							</ul>
+						</div><!-- /btn-group -->
+					</div>
+				</div>
+				<div class="col-xs-1"></div>
+				<div class="col-xs-3">
+					<button type="button" id="search-btn" data-loading-text="Loading..." class="btn btn-primary col-xs-12 zt-search-btn" autocomplete="off">
+						查询
+					</button>
+				</div>
+		</div>
+		<div class="row zt-grade-row">
+			<div class="zt-grade-block">
+				<div class="zt-circle">
+					<span class="zt-circle-span"><i class="nc-icon-outline design_book-open zt-circle-book"></i></span>
+				</div>
+			</div>
+			<div class="zt-grade-box">
+				<div class="zt-grade-list">
+					<table class="table table-hover">
+						<thead>
+						<tr>
+							<th>#</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Username</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>Mark</td>
+							<td>Otto</td>
+							<td>@mdo</td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td>Jacob</td>
+							<td>Thornton</td>
+							<td>@fat</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>@twitter</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<script src="../lib/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="../lib/bower_components/jquery/dist/jquery.slim.min.js"></script>
+	<script src="../lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../lib/bower_components/bootstrap/js/affix.js"></script>
+	<script src="../lib/bower_components/bootstrap/js/alert.js"></script>
+	<script src="../lib/bower_components/bootstrap/js/button.js"></script>
+	<script src="../lib/bower_components/bootstrap/js/carousel.js"></script>
+	<script src="../lib/bower_components/bootstrap/js/collapse.js"></script>
+	<script src="../lib/bower_components/bootstrap/js/modal.js"></script>
+	<script src="../lib/bower_components/bootstrap/js/popover.js"></script>
+	<script src="../lib/bower_components/bootstrap/js/scrollspy.js"></script>
+	<script src="../lib/bower_components/bootstrap/js/tab.js"></script>
+	<script src="../lib/bower_components/bootstrap/js/tooltip.js"></script>
+	<script src="../lib/bower_components/bootstrap/js/transition.js"></script>
+	<script>
+        $('#search-btn').on('click', function () {
+            var $searchBtn = $(this).button('loading')
+            // business logic...
+            $searchBtn.button('reset')
+        })
+	</script>
+</body>
+</html>

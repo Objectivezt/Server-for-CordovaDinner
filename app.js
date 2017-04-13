@@ -10,7 +10,7 @@ var app = express();
 var connection = mysql.createConnection({
     host:'120.24.244.81',
     user:'root',
-    password:'666996',
+    password:'ecjtuoybm',
     port:'3306',
     database:'tests'
 });
@@ -59,7 +59,7 @@ app.get('/',function (req,res,next) {
     //其中起一个参数是相对views的目录
     // 第二个参数是传递给模板引擎的数据
     res.render('index');
-})
+});
 console.log('hellojs');
 
 
@@ -81,8 +81,8 @@ connection.query('SELECT * from ecjtu_user',function (err, row, fields) {
     // console.log(fields);
     // console.log('the solution:', row[0].solution);
 });
-var userAddSql = 'INSERT INTO ecjtu_user values(12,"baomei","","","","111","111",1,1)';
-var userAdd2Sql = 'INSERT INTO ecjtu_user values(13,"ouyang","130266","130999","123456","11","22",1,1)';
+var userAddSql = 'INSERT INTO ecjtu_user values(121111,"baomei1","","","","111","111",1,1)';
+var userAdd2Sql = 'INSERT INTO ecjtu_user values(131111,"ouyang1","130266","130999","123456","11","22",1,1)';
 var userAddSql_Params = [];
 connection.query(userAddSql,function (err,result) {
     if(err){
