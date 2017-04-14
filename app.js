@@ -90,7 +90,7 @@ connection.query(userAddSql,function (err,result) {
     }
     console.log(result);
 });
-connection.query(userAdd2Sql,function (err,result) {
+connection.query(userAdd2Sql,function (err,resulft) {
     console.log(result);
 });
 
