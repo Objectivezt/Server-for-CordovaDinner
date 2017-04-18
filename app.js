@@ -5,24 +5,25 @@
 var express = require('express');
 var swig = require('swig');
 var mysql = require('mysql');
-var sequelize =  require('sequelize');
-var sqldb = require('./sqldb');
-sqldb.sequelize.sync({force:false}).then(function () {
-   console.log('server successed');
-}).catch(function(err){
-    console.log("Server failed to start due to error: %s", err);
-});
+// var Sequelize =  require('sequelize');
+// var sqldb = require('./sqldb');
+// sqldb.sequelize.sync({force:false}).then(function () {
+//    console.log('server successed');
+// }).catch(function(err){
+//     console.log("Server failed to start due to error: %s", err);
+// });
 
 
 //创建app应用 相当于Node.js Http.CreateServer();
 var app = express();
-// var connection = mysql.createConnection({
-//     host:'120.24.244.81',
-//     user:'root',
-//     password:'ecjtuoybm',
-//     port:'3306',
-//     database:'tests'
-// });
+
+var connection = mysql.createConnection({
+    host:'120.24.244.81',
+    user:'root',
+    password:'ecjtuoybm',
+    port:'3306',
+    database:'tests'
+});
 // var sequelize = new Sequelize('tests','root','ecjtuoybm',{host:'120.24.244.81',port:'3306', dialect : 'mysql'})
 // var User = sequelize.define('user', {
 //     username: Sequelize.STRING,
@@ -39,7 +40,8 @@ var app = express();
 //         plain: true
 //     }));
 // });
-
+//__dirname为程序执行时的绝对路径。
+app.use(express.static(path.join('/public/bower_components/angluar/angular-1.6.4/angular.js', 'public')));
 //表示参数表示模板引擎的名称，同时也是模板文件的后缀，第二个参数表示用于解析处理模板内容的方法
 app.engine('html',swig.renderFile);
 //设置模板文件的存放目录，第一个参数必须是views  第二个参数必须是参数的目录
@@ -87,23 +89,23 @@ console.log('hellojs');
 
 
 //创建一个connection
-// connection.connect(function (err) {
-//     if(err){
-//         console.log(err);
-//         return
-//     }
-//     console.log('connection suceesful');
-// });
-// //测试执行sql语句
-// connection.query('SELECT * from ecjtu_user',function (err, row, fields) {
-//     if(err){
-//         console.log(err);
-//         return
-//     }
-//     console.log(row);
-//     // console.log(fields);
-//     // console.log('the solution:', row[0].solution);
-// });
+connection.connect(function (err) {
+    if(err){
+        console.log(err);
+        return
+    }
+    console.log('connection suceesful');
+});
+//测试执行sql语句
+connection.query('SELECT * from ecjtu_user',function (err, row, fields) {
+    if(err){
+        console.log(err);
+        return
+    }
+    console.log(row);
+    // console.log(fields);
+    // console.log('the solution:', row[0].solution);
+});
 // var userAddSql = 'INSERT INTO ecjtu_user values(121111,"baomei1","","","","111","111",1,1)';
 // var userAdd2Sql = 'INSERT INTO ecjtu_user values(131111,"ouyang1","130266","130999","123456","11","22",1,1)';
 // var userAddSql_Params = [];
@@ -117,11 +119,11 @@ console.log('hellojs');
 //     console.log(result);
 // });
 //
-// //关闭connection
-// connection.end(function (err) {
-//     if(err){
-//
-//         return;
-//     }
-//     console.log('close connection');
-// });
+//关闭connection
+connection.end(function (err) {
+    if(err){
+
+        return;
+    }
+    console.log('close connection');
+});

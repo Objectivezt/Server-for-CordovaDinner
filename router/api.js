@@ -8,7 +8,8 @@ router.get('/user',function (req,res,next) {
     res.send('api-User');
 });
 router.get('/register',function (req,res,next) {
-    res.send('register');
+    // res.send('register');
+    res.render('register');
 });
 router.get('/login',function (req,res,next) {
     res.send('login');
@@ -16,6 +17,7 @@ router.get('/login',function (req,res,next) {
 router.get('/forget',function (req,res,next) {
     res.send('forget');
 });
+
 /*
 *个人信息
 *   用户姓名，
