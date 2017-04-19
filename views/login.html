@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>Title</title>
+    <title>登陆</title>
     <link rel="stylesheet" href="/public/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/bower_components/ionic/css/ionic.min.css">
+    <link rel="stylesheet" href="/public/css/main.css">
 </head>
 <body ng-app="myApp" ng-controller="myCtrl">
-<ion-nav-view>
+<ion-pane>
     <ion-content>
         <div class="bar bar-header ">
-            <div class="h1 title">用户注册</div>
+            <div class="h1 title">用户登录</div>
         </div>
         <div class="content has-header">
-            <form ng-submit="onSubmit(myForm.$valid)" name="myForm" novalidate>
+            <form ng-submit="onSubmit(myForm.$valid)"  name="myForm"  novalidate>
                 <div class="list">
                     <div class="item-input-inset">
                         <label class="item-input-wrapper">
@@ -28,38 +29,27 @@
                     <div class="item-input-inset">
                         <label class="item-input-wrapper">
                             <i class="icon ion-locked"></i>
-                            <input type="password" name="password1" ng-model="password1" required id="password1" placeholder="密码">
-                            <div ng-show="myForm.password1.$invalid && submitted">
-                                <div style="color:red" ng-show="myForm.password1.$error.required">密码是必须的</div>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="item-input-inset">
-                        <label class="item-input-wrapper">
-                            <i class="icon ion-locked"></i>
-                            <input type="password" name="password2" ng-model="password2" id="password2" required placeholder="确认密码">
-                            <div ng-show="myForm.password2.$invalid && submitted">
-                                <div style="color:red" ng-show="myForm.password2.$error.required">确认密码是必须的</div>
-                            </div>
-                            <div ng-show="myForm.password2.$valid">
-                                <div style="color:red" ng-show="password1!=password2">两次密码输入不一致</div>
+                            <input type="password" name="password" ng-model="password" id="password" placeholder="密码" required>
+                            <div ng-show="myForm.password.$invalid && submitted">
+                                <div style="color:red" ng-show="myForm.password.$error.required">密码是必须的</div>
                             </div>
                         </label>
                     </div>
                 </div>
                 <div class="padding">
-                    <button class="button button-full button-dark" type="submit">注册</button>
+                    <button class="button button-full button-dark" type="submit">登录</button>
                 </div>
             </form>
         </div>
+
     </ion-content>
+</ion-pane>
 
-</ion-nav-view>
+
 <script src="/public/bower_components/angular/angular-1.6.4/angular.min.js"></script>
+<script src="/public/js/main.js"></script>
 <script>
-    'use strict';
     var myApp = angular.module('myApp',[]);
-
     myApp.controller('myCtrl',['$scope', '$http',function($scope, $http){
         // $scope.formModel = {};
         $scope.submitted = false;
@@ -67,8 +57,7 @@
             if ($scope.myForm.$valid) {
                 var param = {
                     User: $scope.user,
-                    Pwd1: $scope.password1,
-                    Pwd2:$scope.password2
+                    Pwd: $scope.password
                 }
                 $http.post('someurl',param)
                     .success(function(data){
@@ -86,10 +75,6 @@
         }
 
     }]);
-
 </script>
 </body>
 </html>
-
-
-

@@ -12,8 +12,10 @@ router.get('/register',function (req,res,next) {
     res.render('register');
 });
 router.get('/login',function (req,res,next) {
-    res.send('login');
+    // res.send('login');
+    res.render('login');
 });
+
 router.get('/forget',function (req,res,next) {
     res.send('forget');
 });
