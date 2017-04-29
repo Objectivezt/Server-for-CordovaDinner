@@ -12,7 +12,10 @@ router.get('/user',function (req,res,next) {
 //admin
 router.get('/',function (req,res,next) {
     // 第二个参数是传递给模板引擎的数据
-    res.render('grade');
+    // res.render('grade');
+    res.render('admin');
+    // res.render('register');
 });
+
 
 module.exports = router;

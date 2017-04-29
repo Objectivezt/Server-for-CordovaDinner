@@ -4,43 +4,15 @@
 //加载模块
 var express = require('express');
 var swig = require('swig');
-var mysql = require('mysql');
-var path=require("path");
-// var Sequelize =  require('sequelize');
-// var sqldb = require('./sqldb');
-// sqldb.sequelize.sync({force:false}).then(function () {
-//    console.log('server successed');
-// }).catch(function(err){
-//     console.log("Server failed to start due to error: %s", err);
-// });
-
-
+var path = require("path");
+var http = require('http');
+var url = require('url');
+var fs = require('fs');
+var mysqlDbUtil = require('./router/mysqlDbUtil');
+var async = require('async');
+// var $ = require('jquery');
 //创建app应用 相当于Node.js Http.CreateServer();
 var app = express();
-
-var connection = mysql.createConnection({
-    host:'120.24.244.81',
-    user:'root',
-    password:'ecjtuoybm',
-    port:'3306',
-    database:'tests'
-});
-// var sequelize = new Sequelize('tests','root','ecjtuoybm',{host:'120.24.244.81',port:'3306', dialect : 'mysql'})
-// var User = sequelize.define('user', {
-//     username: Sequelize.STRING,
-//     birthday: Sequelize.DATE
-// });
-
-// sequelize.sync().then(function() {
-//     return User.create({
-//         username: 'janedoe',
-//         birthday: new Date(1980, 6, 20)
-//     });
-// }).then(function(jane) {
-//     console.log(jane.get({
-//         plain: true
-//     }));
-// });
 //__dirname为程序执行时的绝对路径。
 // app.use(express.static(path.join('/public/bower_components/angluar/angular-1.6.4/angular.js', 'public')));
 app.use('/public',express.static( path.join(__dirname + '/public')));
@@ -55,8 +27,6 @@ app.set('view engine','html');
 //开发过程中取消模板缓存
 swig.setDefaults({cache: false});
 
-
-
 //管理员
 app.use('/admin',require('./router/admin'));
 //常用的api
@@ -64,7 +34,6 @@ app.use('/api',require('./router/api'));
 //主页
 app.use('/',require('./router/main'));
 //店铺管理
-
 app.use('/categorys',require('./router/categorys'));
 //菜品管理
 app.use('/food',require('./router/food'));
@@ -73,7 +42,9 @@ app.use('/comment',require('./router/comment'));
 app.use('/stores',require('./router/stores'));
 //菜品分类管理
 
-app.listen(8199);
+app.listen(8199,function () {
+    console.log('server start at 8199')
+});
 
 //首页的默认
 app.get('/',function (req,res,next) {
@@ -92,42 +63,6 @@ app.get('/',function (req,res,next) {
 console.log('hellojs');
 
 
-//创建一个connection
-connection.connect(function (err) {
-    if(err){
-        console.log(err);
-        return
-    }
-    console.log('connection suceesful');
-});
-//测试执行sql语句
-connection.query('SELECT * from ecjtu_user',function (err, row, fields) {
-    if(err){
-        console.log(err);
-        return
-    }
-    console.log(row);
-    // console.log(fields);
-    // console.log('the solution:', row[0].solution);
-});
-// var userAddSql = 'INSERT INTO ecjtu_user values(121111,"baomei1","","","","111","111",1,1)';
-// var userAdd2Sql = 'INSERT INTO ecjtu_user values(131111,"ouyang1","130266","130999","123456","11","22",1,1)';
-// var userAddSql_Params = [];
-// connection.query(userAddSql,function (err,result) {
-//     if(err){
-//         console.log('123');
-//     }
-//     console.log(result);
-// });
-// connection.query(userAdd2Sql,function (err,resulft) {
-//     console.log(result);
-// });
-//
-//关闭connection
-connection.end(function (err) {
-    if(err){
 
-        return;
-    }
-    console.log('close connection');
-});
+
+

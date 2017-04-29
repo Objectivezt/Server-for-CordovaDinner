@@ -28,6 +28,7 @@
     "cookies": "^0.7.0",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
+    "fs": "0.0.1-security",
     "glop": "^0.3.1",
     "grunt": "^1.0.1",
     "http": "0.0.0",
@@ -39,9 +40,11 @@
     "node-mysql": "^0.4.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "redis": "^2.7.1",
     "sequelize": "^3.30.4",
     "swig": "^1.4.2",
+    "url": "^0.11.0",
     "ws": "^2.2.3"
   }
 }
