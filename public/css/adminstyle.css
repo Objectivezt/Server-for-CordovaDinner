@@ -1,0 +1,42 @@
+.zt-admin-navlist{
+    display: block;
+    float: left;
+}
+
+/*body {*/
+    /*padding-top: 70px;*/
+/*}*/
+.zt-loginAdmin-body{
+    height: 500px;
+}
+.zt-loginAdmin-contrainer{
+    max-width:525px !important;
+    height: 300px;
+    display: block;
+    margin:0 auto;
+}
+.zt-adminlogin-container{
+    margin:0 auto;
+}
+.zt-navadmin-ul{
+    display: block;
+    float: left;
+    width:30px;
+    height:30px;
+}
+.zt-nav-bar{
+    min-height:42px;
+    border-bottom: #fff 1px solid;
+    width:100%;
+}
+
+.zt-navbar-h2{
+    width: 100%;
+    height: 60px;
+}
+
+.zt-navbar-h2>h2{
+    font-size: 20px;
+    text-align: center;
+    line-height: 60px;
+}

@@ -7,74 +7,71 @@
     <link rel="stylesheet" href="/public/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/bower_components/ionic/css/ionic.min.css">
     <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/adminstyle.css">
 </head>
-<body ng-app="myApp" ng-controller="myCtrl">
-<ion-pane>
-    <ion-content>
-        <div class="bar bar-header ">
-            <div class="h1 title">用户登录</div>
+<body ng-app="myApp" class="zt-loginAdmin-body">
+    <ion-content class="zt-loginAdmin-contrainer" ng-controller="loginCtrl">
+        <div class="bar bar-header bar-light bar-energized">
+            <h1 class="title">花椒餐厅点餐商家管理平台</h1>
         </div>
-        <div class="content has-header">
-            <form ng-submit="onSubmit(myForm.$valid)"  name="myForm"  novalidate>
-                <div class="list">
+        <div class="bar bar-subheader">
+            <h2 class="title">登陆</h2>
+        </div>
+        <div class="content has-header zt-adminlogin-container">
+            <form ng-submit="onSubmit(myLogin.$valid)"  name="myLogin"  novalidate>
+                <div class="list zt-login-list">
                     <div class="item-input-inset">
-                        <label class="item-input-wrapper">
-                            <i class="icon ion-person"></i>
-                            <input type="text" name="user" id="user" ng-model="user" placeholder="用户名" required>
-                            <div ng-show="myForm.user.$invalid && submitted">
-                                <div style="color:red" ng-show="myForm.user.$error.required">用户名是必须的</div>
+                        <label class="item-input-wrapper item item-input">
+                            <span class="input-label zt-login-label"><i class="nc-icon-outline users_mobile-contact zt-login-icon"></i>店铺编号</span>
+                            <input type="text" name="userid" id="userid" ng-model="userid" placeholder="请输入账号/学号" required>
+                            <div ng-show="myLogin.userid.$invalid && submitted">
+                                <div style="color:red" ng-show="myLogin.user.$error.required">用户名是必须的</div>
                             </div>
                         </label>
                     </div>
                     <div class="item-input-inset">
-                        <label class="item-input-wrapper">
-                            <i class="icon ion-locked"></i>
-                            <input type="password" name="password" ng-model="password" id="password" placeholder="密码" required>
-                            <div ng-show="myForm.password.$invalid && submitted">
-                                <div style="color:red" ng-show="myForm.password.$error.required">密码是必须的</div>
+                        <label class="item-input-wrapper item item-input">
+                            <span class="input-label zt-login-label"><i class="nc-icon-outline objects_key-25 zt-login-icon"></i>密码</span>
+                            <input type="password" name="password" ng-model="password" id="password" placeholder="请输入密码" required>
+                            <div ng-show="myLogin.password.$invalid && submitted">
+                                <div style="color:red" ng-show="myLogin.password.$error.required">密码是必须的</div>
                             </div>
                         </label>
                     </div>
                 </div>
                 <div class="padding">
-                    <button class="button button-full button-dark" type="submit">登录</button>
+                    <button class="button  button-block button-energized bar-energized" type="submit">登录</button>
                 </div>
             </form>
         </div>
-
     </ion-content>
-</ion-pane>
-
-
 <script src="/public/bower_components/angular/angular-1.6.4/angular.min.js"></script>
 <script src="/public/js/main.js"></script>
+
 <script>
-    var myApp = angular.module('myApp',[]);
-    myApp.controller('myCtrl',['$scope', '$http',function($scope, $http){
-        // $scope.formModel = {};
-        $scope.submitted = false;
-        $scope.onSubmit = function(){
-            if ($scope.myForm.$valid) {
-                var param = {
-                    User: $scope.user,
-                    Pwd: $scope.password
+    angular.module('myApp',[])
+        .controller('loginCtrl',['$scope', '$http', function($scope, $http, $ionicModal, $timeout,$location){
+            // $scope.formModel = {};
+            $scope.submitted = false;
+            $scope.onSubmit = function(){
+                if ($scope.myLogin.$valid) {
+                    var param = {
+                        User: $scope.userid,
+                        Pwd: $scope.password
+                    }
+                    $http.post('someurl',param)
+                        .success(function(data){
+                            console.log(':)');
+                        })
+                        .error(function(data){
+                            console.log(':(');
+                        });
+                    console.log(param);
+                }else{
+                    $scope.submitted = true;
                 }
-                $http.post('someurl',param)
-                    .success(function(data){
-                        console.log(':)');
-                    })
-                    .error(function(data){
-                        console.log(':(');
-                    });
-
-                console.log(param);
-            }else{
-                $scope.submitted = true;
             }
-
-        }
-
-    }]);
+        }])
 </script>
 </body>
 </html>

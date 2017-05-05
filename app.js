@@ -16,9 +16,7 @@ var app = express();
 //__dirname为程序执行时的绝对路径。
 // app.use(express.static(path.join('/public/bower_components/angluar/angular-1.6.4/angular.js', 'public')));
 app.use('/public',express.static( path.join(__dirname + '/public')));
-
 //表示参数表示模板引擎的名称，同时也是模板文件的后缀，第二个参数表示用于解析处理模板内容的方法
-
 app.engine('html',swig.renderFile);
 //设置模板文件的存放目录，第一个参数必须是views  第二个参数必须是参数的目录
 app.set('views','./views');
@@ -41,11 +39,9 @@ app.use('/food',require('./router/food'));
 app.use('/comment',require('./router/comment'));
 app.use('/stores',require('./router/stores'));
 //菜品分类管理
-
 app.listen(8199,function () {
     console.log('server start at 8199')
 });
-
 //首页的默认
 app.get('/',function (req,res,next) {
     //req表示保存客户端请求相关数据
