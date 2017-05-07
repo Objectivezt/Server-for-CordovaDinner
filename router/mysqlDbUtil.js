@@ -119,6 +119,7 @@ var insertRegister = function(req,res,username,stuid,classid,password){
                         console.log(row[0]);
                         if(row.length == 1){
                             var loginBingo = {'loginStatus':'bingo',
+                                'uid':row[0].uid,
                                 'username': row[0].username,
                                 'stuid': row[0].stuid,
                                 'classid': row[0].classid,
@@ -143,7 +144,48 @@ var insertRegister = function(req,res,username,stuid,classid,password){
             res.end(JSON.stringify(rows));
             // res.end(rows.join);
         })
-    }
+    },insertBuyData = function (res,otime,gf_id,uid) {
+        // oprice,uid,gid,
+        connection.query('insert into zt_detail (order_time,dshop,dremake) values("'+otime+'","'+gf_id+'","'+uid+'")',function (err,rows) {
+            if(err){
+                console.log(err);
+                return
+            }
+            // console.log(rows);
+            // res.end(JSON.stringify(rows));
+        });
+    },selectdid = function (res) {
+        var did = 0;
+        connection.query('select * from zt_detail',function (err,rows) {
+            if(err){
+                console.log(err);
+                return
+            }
+            did = rows[rows.length-1].did;
+            console.log(did)
+            return did;
+        });
+    },insertBuyDetail = function (res,detailid,greensid,oprice) {
+        connection.query('insert into zt_odetail (detail_id,greens_id,oprice) values("'+detailid+'","'+greensid+'","'+oprice+'")',function (err,rows) {
+          if (err) {
+              console.log(err);
+              return
+          }
+          console.log(rows);
+          // res.end(JSON.stringify(rows));
+      })
+    },selectdetails = function (res) {
+        connection.query('SELECT * FROM zt_odetail,zt_detail WHERE zt_odetail.detail_id = zt_detail.did;',function (err,rows) {
+            if (err) {
+                console.log(err);
+                return
+            }
+            console.log(rows);
+        });
+    };
+    selectdetails(1);
+    // insertBuyData(1,2,3,4,5,6);
+    // insertBuyDetail(1,6,3,4);
 
 
 var userApi = http.createServer(function (req, res) {
@@ -283,6 +325,44 @@ var dinnerApi = http.createServer(function (req,res) {
             })
         });
     }
+    else if(url_info.pathname === '/greensDetailsName'){
+        var greensDetailsName = '',
+            greensDetailNameObj = {};
+            greensDetailid = '';
+
+        res.writeHead(200,{
+            "Content-Type": "text/plain; charset=utf-8",
+            "Access-Control-Allow-Origin": "*"
+        });
+        //监听,前端有数据,有就调用
+        req.addListener('data',function (data) {
+            greensDetailsName += data;
+        });
+        //前端数据接收完毕
+        req.addListener('end',function () {
+            console.log('搜索数据接收完毕');
+            //转化为JSON对象
+            greensDetailNameObj = JSON.parse(greensDetailsName);
+            console.log(greensDetailNameObj);
+            greensDetailid = greensDetailNameObj.ParamId;
+            // selectShopData(res,shopPage);
+            console.log(greensDetailid);
+            connection.query('SELECT * FROM  zt_greens where g_nickname = "'+greensDetailid+'"',function (err,rows,fields) {
+                if(err){
+                    console.log(err);
+                    return
+                }
+                console.log(rows);
+                console.log(rows.length);
+                if(rows.length>0){
+                    res.end(JSON.stringify(rows[0]));
+                    res.end(rows.join);
+                }else{
+                    res.end(JSON.stringify(rows[0]));
+                }
+            })
+        });
+    }
     else if(url_info.pathname === '/shopData'){
         var shopPageData = '',
             shopPageObj = {},
@@ -297,14 +377,70 @@ var dinnerApi = http.createServer(function (req,res) {
         });
         //前端数据接收完毕
         req.addListener('end',function () {
-            console.log('用户登录数据接收完毕');
+            console.log('店铺数据接收完毕');
             //转化为JSON对象
             shopPageObj = JSON.parse(shopPageData);
             console.log(shopPageObj);
             shopPage = shopPageObj.ParamId;
             selectShopData(res,shopPage);
         });
-    }else if(url_info.pathname === '/messData'){
+    }
+    else if(url_info.pathname === '/greensbuy'){
+        var greenBuyData = '',
+            greenBuyObj = {};
+        res.writeHead(200,{
+            "Content-Type": "text/plain; charset=utf-8",
+            "Access-Control-Allow-Origin": "*"
+        });
+        //监听,前端有数据,有就调用
+        req.addListener('data',function (data) {
+            greenBuyData += data;
+        });
+        //前端数据接收完毕
+        req.addListener('end',function () {
+            console.log('购买数据接收完毕');
+            var tempdid = 0;
+            //转化为JSON对象
+            greenBuyObj = JSON.parse(greenBuyData);
+            console.log(greenBuyObj);
+            insertBuyData(res,greenBuyObj.buydate,greenBuyObj.gf_id,greenBuyObj.uid);
+            connection.query('select * from zt_detail',function (err,rows,fields) {
+                var didObj = {
+                    didObjnum : rows[rows.length-1].did
+                };
+                if(err){
+                    console.log(err);
+                    return
+                }
+                res.end(JSON.stringify(didObj));
+            });
+        });
+    }
+    else if(url_info.pathname === '/greensbuydata'){
+        var greensbuydataData = '',
+            greensbuydataObj = {};
+        res.writeHead(200,{
+            "Content-Type": "text/plain; charset=utf-8",
+            "Access-Control-Allow-Origin": "*"
+        });
+        //监听,前端有数据,有就调用
+        req.addListener('data',function (data) {
+            greensbuydataData += data;
+        });
+        //前端数据接收完毕
+        req.addListener('end',function () {
+            console.log('购买did数据接收完毕');
+            var tempdid = 0;
+            //转化为JSON对象
+            greensbuydataObj = JSON.parse(greensbuydataData);
+            // console.log(greensbuydataData);
+            console.log(greensbuydataObj);
+            insertBuyDetail(res,greensbuydataObj.buydid,greensbuydataObj.oprice,greensbuydataObj.gid);
+
+        });
+    }
+
+    else if(url_info.pathname === '/messData'){
         res.writeHead(200,{
             "Content-Type": "text/plain; charset=utf-8",
             "Access-Control-Allow-Origin": "*"
