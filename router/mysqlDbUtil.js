@@ -183,7 +183,7 @@ var insertRegister = function(req,res,username,stuid,classid,password){
             console.log(rows);
         });
     };
-    selectdetails(1);
+    // selectdetails(1);
     // insertBuyData(1,2,3,4,5,6);
     // insertBuyDetail(1,6,3,4);
 
