@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="detail">
+<head>
+    <meta charset="UTF-8">
+    <title>花椒餐厅管理平台</title>
+    <link rel="stylesheet" href="/public/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/adminstyle.css">
+</head>
+<body ng-controller="detailAdminCtrl">
+<nav class="navbar-default">
+    <div class="zt-navbar-h2">
+        <h2>欢迎<span>周滔</span>光临花椒餐厅商家管理平台</h2>
+    </div>
+</nav>
+<nav class="container navbar-default navbar zt-nav-bar">
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="/admin/adminDetaillist">订单列表</a></li>
+        <li role="presentation"><a href="/admin/adminComment">评价列表</a></li>
+        <li role="presentation"><a href="/admin/adminGreens">菜品列表</a></li>
+    </ul>
+</nav>
+<section  class="zt-section">
+    <div class="panel panel-default">
+        <div class="panel-heading">我的订单列表</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>订单总编号</th>
+                <th>订单明细编号</th>
+                <th>下单时间</th>
+                <th>取货编号</th>
+                <th>取餐人</th>
+            </tr>
+            </thead>
+            <tbody id="ios">
+            <!--<tr>-->
+                <!--<th scope="row">0000001</th>-->
+                <!--<td>20170204</td>-->
+                <!--<td>20170204</td>-->
+                <!--<td>114518</td>-->
+                <!--<td>20132110010309</td>-->
+            <!--</tr>-->
+            </tbody>
+        </table>
+    </div>
+</section>
+<script src="/public/bower_components/angular/angular-1.6.4/angular.min.js"></script>
+<script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/public/js/ng_admin_detaiLlist.js"></script>
+<script src="/public/js/ng_service.js"></script>
+</body>
+</html>

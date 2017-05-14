@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="greensAdd">
+<head>
+    <meta charset="UTF-8">
+    <title>花椒餐厅管理平台</title>
+    <link rel="stylesheet" href="/public/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/adminstyle.css">
+</head>
+<body ng-controller="greensAddAdminCtrl">
+<nav class="navbar-default">
+    <div class="zt-navbar-h2">
+        <h2>欢迎<span>周滔</span>光临花椒餐厅商家管理平台</h2>
+    </div>
+</nav>
+<section>
+    <form>
+        <div class="form-group">
+            <label for="goodsname">菜品名称</label>
+            <input type="text" class="form-control" id="goodsname"  name="goodsname" ng-model="goodsname" placeholder="请输入菜品名称">
+        </div>
+        <div class="form-group">
+            <label for="goodsdescription">菜品描述</label>
+            <input type="text" class="form-control" id="goodsdescription" name="goodsdescription" ng-model="goodsdescription" placeholder="菜品描述">
+        </div>
+        <div class="form-group">
+            <label for="goodsprice">菜品价格</label>
+            <input type="text" class="form-control" id="goodsprice" name="goodsprice"  ng-model="goodsprice" placeholder="菜品价格">
+        </div>
+        <div class="form-group" style="display: block;float: left">
+            <label for="exampleInputFile">菜品图片</label>
+            <input type="file"  id="exampleInputFile">
+        </div>
+        <button type="submit" id="submit" class="btn btn-primary" style="display: block;float: right;margin-right: 20px">提交菜品</button>
+    </form>
+</section>
+<script src="/public/bower_components/angular/angular-1.6.4/angular.min.js"></script>
+<script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/public/js/ng_admin-addgreens.js"></script>
+<script src="/public/js/ng_service.js"></script>
+</body>
+</html>

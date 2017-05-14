@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>登陆</title>
+    <title>花椒餐厅点餐商家管理平台-登录</title>
     <link rel="stylesheet" href="/public/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/bower_components/ionic/css/ionic.min.css">
     <link rel="stylesheet" href="/public/css/main.css">
@@ -18,11 +18,11 @@
             <h2 class="title">登陆</h2>
         </div>
         <div class="content has-header zt-adminlogin-container">
-            <form ng-submit="onSubmit(myLogin.$valid)"  name="myLogin"  novalidate>
+            <form ng-submit="onSubmit(myLogin.$valid)"  name="myLogin" style="margin-top: 60px;"  novalidate>
                 <div class="list zt-login-list">
                     <div class="item-input-inset">
                         <label class="item-input-wrapper item item-input">
-                            <span class="input-label zt-login-label"><i class="nc-icon-outline users_mobile-contact zt-login-icon"></i>店铺编号</span>
+                            <span class="input-label zt-login-label"><i class="nc-icon-outline users_mobile-contact zt-login-icon"></i>账号</span>
                             <input type="text" name="userid" id="userid" ng-model="userid" placeholder="请输入账号/学号" required>
                             <div ng-show="myLogin.userid.$invalid && submitted">
                                 <div style="color:red" ng-show="myLogin.user.$error.required">用户名是必须的</div>
@@ -47,31 +47,68 @@
     </ion-content>
 <script src="/public/bower_components/angular/angular-1.6.4/angular.min.js"></script>
 <script src="/public/js/main.js"></script>
-
 <script>
     angular.module('myApp',[])
-        .controller('loginCtrl',['$scope', '$http', function($scope, $http, $ionicModal, $timeout,$location){
-            // $scope.formModel = {};
+        .controller('loginCtrl',function($scope, $http,localstorage){
             $scope.submitted = false;
             $scope.onSubmit = function(){
                 if ($scope.myLogin.$valid) {
                     var param = {
-                        User: $scope.userid,
-                        Pwd: $scope.password
-                    }
-                    $http.post('someurl',param)
-                        .success(function(data){
-                            console.log(':)');
-                        })
-                        .error(function(data){
-                            console.log(':(');
+                        Stuid: $scope.userid,
+                        Pwd: $scope.password,
+                        Auth: true
+                    };
+                    $http({
+                        method:'POST',
+                        url:'http://localhost:8197/selectUserinfo',
+                        headers:{
+                            'Content-Type' : 'application/x-www-form-urlencoded'
+                        },
+                        data:param
+                    }).then(function success(res) {
+                        console.log('ok');
+                        console.log(res);
+                        localstorage.setObject('ecjtuA_auth', {
+                            'uid':res.data.uid,
+                            'username': res.data.username,
+                            'stuid': res.data.stuid,
+                            'classid': res.data.classid,
+                            'grade': res.data.grade,
+                            'permission': res.data.permission
                         });
+                        var infos = localstorage.getObject('ecjtuA_auth');
+                        console.log(infos);
+                    },function (err) {
+                        console.log(err);
+                    });
                     console.log(param);
                 }else{
                     $scope.submitted = true;
                 }
             }
-        }])
+        })
+        .factory('localstorage',['$window',function ($window) {
+            return{
+                set:function (key,value) {
+                    $window.localStorage[key] = value;
+                },
+                get:function (key,defaultValue) {
+                    return $window.localStorage[key] || defaultValue;
+                },
+                setObject:function(key, value){
+                    $window.localStorage[key] = JSON.stringify(value);
+                },
+                getObject:function (key) {
+                    return JSON.parse($window.localStorage[key] || '{}');
+                },
+                removeObject:function(key){
+                    return $window.localStorage.removeItem(key);
+                },
+                clearLocalStorage:function(){
+                    return $window.localStorage.clear();
+                }
+            }
+        }])//创建localStorage模型
 </script>
 </body>
 </html>

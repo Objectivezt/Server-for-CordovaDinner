@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="greens">
+<head>
+    <meta charset="UTF-8">
+    <title>花椒餐厅管理平台</title>
+    <link rel="stylesheet" href="/public/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/adminstyle.css">
+</head>
+<body ng-controller="greensAdminCtrl">
+<nav class="navbar-default" >
+    <div class="zt-navbar-h2">
+        <h2>欢迎<span>周滔</span>光临花椒餐厅商家管理平台</h2>
+    </div>
+</nav>
+<nav class="container navbar-default navbar zt-nav-bar">
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="/admin/adminDetaillist">订单列表</a></li>
+        <li role="presentation"><a href="/admin/adminComment">评价列表</a></li>
+        <li role="presentation" class="active"><a href="/admin/adminGreens">菜品列表</a></li>
+    </ul>
+</nav>
+<section  class="zt-section">
+    <div class="panel panel-default">
+        <div class="panel-heading">店铺的菜品信息     <a href="/admin/adminGreens/adminAdd" style="display: block;float: right">添加菜品</a></div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>菜品编号</th>
+                <th>菜品名称</th>
+                <th>菜品介绍</th>
+                <th>菜品价格</th>
+                <th>菜品是否无货</th>
+            </tr>
+            </thead>
+            <tbody id="ios">
+            <!--<tr>-->
+                <!--<th scope="row">001012</th>-->
+                <!--<td>黄焖鸡米饭</td>-->
+                <!--<td>黄焖鸡米饭开始于明朝时期</td>-->
+                <!--<td>17</td>-->
+                <!--<td><button  class="btn btn-primary">无货</button></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<th scope="row">001032</th>-->
+                <!--<td>辣子鸡</td>-->
+                <!--<td>辣子鸡来自于热油爆炒的鸡肉</td>-->
+                <!--<td>21</td>-->
+                <!--<td><button  class="btn btn-primary">无货</button></td>-->
+            <!--</tr>-->
+            </tbody>
+        </table>
+    </div>
+</section>
+<script src="/public/bower_components/angular/angular-1.6.4/angular.min.js"></script>
+<script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/public/js/ng_admin_greens.js"></script>
+<script src="/public/js/ng_service.js"></script>
+</body>
+</html>
