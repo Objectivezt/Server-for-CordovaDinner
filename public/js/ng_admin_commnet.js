@@ -2,7 +2,7 @@
  * Created by Jack on 2017/5/11.
  */
 angular.module('comment',['ServiceModule'])
-    .controller('commentAdminCtrl',function($scope,$http,localstorage){
+    .controller('commentAdminCtrl',function($scope,$http,localstorage,host,dateChange){
         $scope.shopPlace = function (num) {
             var tempplace = '';
             switch (num)
@@ -43,7 +43,7 @@ angular.module('comment',['ServiceModule'])
         console.log(localstorage.getObject('ecjtuA_auth').classid);
         $http({
             method: 'POST',
-            url: 'http://localhost:8198/commentAdmin',
+            url: host.localhost+'/commentAdmin',
             headers:{
                 'Content-Type' : 'application/x-www-form-urlencoded'
             },
@@ -59,7 +59,7 @@ angular.module('comment',['ServiceModule'])
                     commentNickname:tempCommentData[i].g_nickname,
                     commentShopPlace:$scope.shopPlace(tempCommentData[i].sf_id),
                     commentText:tempCommentData[i].ccomment,
-                    commentTime:tempCommentData[i].ctime
+                    commentTime:dateChange.formatTime(tempCommentData[i].ctime)
                 })
             }
             $scope.commentFn = $scope.commentData;
@@ -67,7 +67,7 @@ angular.module('comment',['ServiceModule'])
             console.log($scope.commentFn);
             temps = $scope.commentFn;
             for(var j = 0; j < temps.length; j++){
-                jQuery('#ios').append('<tr><th>'+temps[j].commentText+'</th> <td>'+temps[j].commentTime+'</td> <td>'+temps[j].commentStar+'/5</td> <td>'+temps[j].commentText+'</td> </tr>');
+                jQuery('#ios').append('<tr><th>'+temps[j].commentNickname+'</th> <td>'+temps[j].commentTime+'</td> <td>'+temps[j].commentStar+'/5</td> <td>'+temps[j].commentText+'</td> </tr>');
             }
 
         }, function errorCallback(response) {

@@ -2,7 +2,7 @@
  * Created by Jack on 2017/5/12.
  */
 angular.module('detail',['ServiceModule'])
-    .controller('detailAdminCtrl',function($scope,$http,localstorage){
+    .controller('detailAdminCtrl',function($scope,$http,localstorage,dateChange,host){
         $scope.detailData = [];
         var param = {
             'classid' :localstorage.getObject('ecjtuA_auth').classid
@@ -10,7 +10,7 @@ angular.module('detail',['ServiceModule'])
         console.log(localstorage.getObject('ecjtuA_auth').classid);
         $http({
             method: 'POST',
-            url: 'http://localhost:8198/detailAdmin',
+            url: host.localhost+'/detailAdmin',
             headers:{
                 'Content-Type' : 'application/x-www-form-urlencoded'
             },
@@ -22,7 +22,7 @@ angular.module('detail',['ServiceModule'])
                 $scope.detailData.push({
                     did:res.data[i].did,
                     dtid:res.data[i].odid,
-                    dtime:res.data[i].order_time,
+                    dtime:dateChange.formatTime(res.data[i].order_time),
                     dgcode:res.data[i].getcode,
                     duser:res.data[i].username
                 })
@@ -30,7 +30,7 @@ angular.module('detail',['ServiceModule'])
             temps = $scope.detailData;
             for(var j = 0; j < temps.length; j++){
                 jQuery('#ios').append('<tr><th>'+temps[j].dtid+'</th><td>'+temps[j].did+'</td><td>'+temps[j].dtime+'</td><td>'+temps[j].dgcode+'</td> <td>'+temps[j].duser+'</td></tr>');
-            }
+        }
         }, function errorCallback(res) {
         });
     });

@@ -268,13 +268,12 @@ var insertRegister = function(req,res,username,stuid,classid,password){
         })
     },
     selectdetailadmin = function (res,classid) {
-        connection.query('SELECT * FROM zt_odetail,zt_detail,zt_user   WHERE  zt_detail.dremake = zt_user.uid and zt_odetail.detail_id = zt_detail.did  and  zt_detail.dshop ="'+classid+'"',function (err,rows) {
+        connection.query('SELECT did,odid,order_time,getcode,username   FROM zt_odetail,zt_detail,zt_user   WHERE  zt_detail.dremake = zt_user.uid and zt_odetail.detail_id = zt_detail.did  and  zt_detail.dshop ="'+classid+'"',function (err,rows) {
             if (err) {
                 console.log(err);
                 return
             }
             console.log(rows.length);
-
             res.end(JSON.stringify(rows));
         })
     },
